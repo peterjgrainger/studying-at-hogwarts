@@ -5,5 +5,4 @@ export enum PublishingInformation {
     DESCRIPTION = 'INSERT AWSOME DESCRIPTION - IMPORTANT!',
     TESTING_INSTRUCTIONS = 'n/a',
     CATEGORY = 'EDUCATION_AND_REFERENCE',
-    APP_ENDPOINT = '',
 }
