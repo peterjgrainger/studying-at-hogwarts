@@ -1,23 +1,12 @@
+import { config } from "../config";
+import { PublishingInformation } from "../publishing-information";
 import { ImageLinks } from "./image-links";
 /* tslint:disable */
-export function skill(url: string, userSetInfo, links: ImageLinks) {
+export function skill(url: string, userSetInfo: any, links: ImageLinks) {
     return {
       manifest: {
       publishingInformation: {
-        locales: {
-          'en-GB': {
-            summary: userSetInfo.SUMMARY,
-            examplePhrases: [
-              `Alexa open ${userSetInfo.APP_NAME}`,
-              `Alexa launch ${userSetInfo.APP_NAME}`,
-              `Alexa start ${userSetInfo.APP_NAME}`,
-            ],
-            name: userSetInfo.NAME,
-            description: userSetInfo.DESCRIPTION,
-            smallIconUri: links.small,
-            largeIconUri: links.big,
-          },
-        },
+        locales: setPublishingInfoForLocales(userSetInfo, links),
         isAvailableWorldwide: true,
         testingInstructions: userSetInfo.TESTING_INSTRUCTIONS,
         category: userSetInfo.CATEGORY,
@@ -34,12 +23,7 @@ export function skill(url: string, userSetInfo, links: ImageLinks) {
       manifestVersion: "1.0",
       privacyAndCompliance: {
         allowsPurchases: false,
-        locales: {
-          "en-GB": {
-            termsOfUseUrl: "",
-            privacyPolicyUrl: "",
-          },
-        },
+        locales: setPublishingInfoForPrivacyAndCompliance(),
         isExportCompliant: true,
         isChildDirected: false,
         usesPersonalInfo: false,
@@ -47,4 +31,42 @@ export function skill(url: string, userSetInfo, links: ImageLinks) {
       },
     },
   };
+}
+
+/**
+ * For each locale specified in config.  Create a new section
+ * 
+ * @param userSetInfo 
+ * @param links 
+ */
+function setPublishingInfoForLocales(userSetInfo: any, links : ImageLinks) {
+
+  return config.locales.reduce((acc, locale) => {
+    acc[locale] = {
+        summary: userSetInfo.SUMMARY,
+        examplePhrases: [
+          userSetInfo.EXAMPLE_PHRASES_1,
+          userSetInfo.EXAMPLE_PHRASES_2,
+          userSetInfo.EXAMPLE_PHRASES_3
+        ],
+        name: userSetInfo.NAME,
+        description: userSetInfo.DESCRIPTION,
+        smallIconUri: links.small,
+        largeIconUri: links.big,
+      }
+      return acc;
+    }, {});
+}
+
+/**
+ * For each locale specified in config.  Create a new section
+ */
+function setPublishingInfoForPrivacyAndCompliance() {
+  return config.locales.reduce((acc, locale) => {
+    acc[locale] = {
+        termsOfUseUrl: "",
+        privacyPolicyUrl: "",
+      }
+      return acc;
+    }, {});
 }

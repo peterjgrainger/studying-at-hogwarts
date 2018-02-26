@@ -1,6 +1,5 @@
 import { Request, request, response } from "alexa-app/types";
 import test from 'ava';
-import {instance, mock, verify} from 'ts-mockito';
 import { PublishingInformation } from '../../../publishing-information';
 import {stopAction} from './stop-action';
 

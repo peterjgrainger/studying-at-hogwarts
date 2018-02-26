@@ -1,6 +1,5 @@
 import { Context, dialog, IntentRequest, LaunchRequest, request, RequestBody, response, session} from "alexa-app/types";
 import test from 'ava';
-import {instance, mock, verify} from 'ts-mockito';
 import {HelloWorld} from './hello-world';
 
 test((t) => {

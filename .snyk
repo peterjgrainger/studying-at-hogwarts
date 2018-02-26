@@ -326,9 +326,6 @@ ignore:
     - snyk > snyk-nuget-plugin > xml2js > xmlbuilder > lodash:
         reason: None given
         expires: '2018-03-19T14:49:27.970Z'
-    - ts-mockito > lodash:
-        reason: None given
-        expires: '2018-03-19T14:49:27.970Z'
     - nyc > istanbul-lib-instrument > babel-types > lodash:
         reason: None given
         expires: '2018-03-19T14:49:27.971Z'

@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 import {uploadFile} from 'imgur';
 import * as prompt from "prompt";
 import {promisify} from "util";
+import { config } from '../config';
 import { PublishingInformation } from "../publishing-information";
 import { AlexaApp } from "../skill-definition/alexa-app";
 import { askConfig } from "./ask-config";
@@ -47,10 +48,13 @@ void async function() {
         }
     }
 
+    const convertedModel = JSON.stringify(interactionModel(Object.values(alexaApp.intents),
+                                                           PublishingInformation),
+                                          null,
+                                          2);
+
     // Make the three required files for Amazon
     writeFileSync(`./app/skill.json`, JSON.stringify(skill(url, PublishingInformation, image), null, 2));
-    writeFileSync(`./app/models/en-GB.json`, JSON.stringify(interactionModel(Object.values(alexaApp.intents),
-                                                            PublishingInformation),
-                                                            null,
-                                                            2));
+    // create a new file per locale.  All the same
+    config.locales.forEach((value) => writeFileSync(`./app/models/${value}.json`, convertedModel));
 }();
