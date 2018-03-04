@@ -1,5 +1,5 @@
 import {readSync} from 'clipboardy';
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import {uploadFile} from 'imgur';
 import * as prompt from "prompt";
 import {promisify} from "util";
@@ -19,13 +19,10 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b
 // tslint:disable-next-line:only-arrow-functions
 void async function() {
     // Read url from the clipboard
-    let url = readSync();
+    const nowJson = readFileSync('./now.json', 'UTF8');
+    const alias = JSON.parse(nowJson).alias;
+    const url = `https://${alias}.now.sh`;
 
-    // if not a valid regex get from cli input
-    if (!urlRegex.test(url)) {
-        const result = await (promisify(prompt.get)(['heroku endpoint:☝️']));
-        url = `https://${result['heroku endpoint:☝️']}`;
-    }
     // initialise the app.
     const alexaApp = new AlexaApp();
     alexaApp.addIntents();

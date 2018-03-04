@@ -13,7 +13,7 @@
 
 ## Quickstart
 
-### Set up accounts with aws / now / heroku
+### Set up accounts with aws / now
 
 ```
 npm run init
@@ -23,18 +23,6 @@ npm run init
 
 ```shell
 npm run deploy:now
-```
-
-### First time deploying to Heroku need to create a new dyno
-
-
-```shell
-npm run deploy:new-heroku
-```
-
-### Deploy code to heroku and spec to AWS
-```shell
-npm run deploy:update-heroku
 ```
 
 ## Test
