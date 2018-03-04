@@ -22,11 +22,17 @@ npm run init
 ### Deploy code to now and spec to AWS
 
 ```shell
-npm run deploy:now
+npm run deploy
 ```
 
 ## Test
 
 ```shell
 npm test
+```
+
+## Test manually in AWS
+
+```shell
+npm run ask:testing
 ```
