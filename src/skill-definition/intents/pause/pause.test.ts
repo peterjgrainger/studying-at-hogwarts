@@ -1,11 +1,11 @@
 import { Context, dialog, IntentRequest, LaunchRequest, request, RequestBody, response, session} from "alexa-app/types";
 import test from 'ava';
-import {HelloWorld} from './hello-world';
+import {Pause} from './pause';
 
 test((t) => {
-    const helloWorld = new HelloWorld();
+    const helloWorld = new Pause();
 
-    t.plan(6);
+    t.plan(3);
 
     const testRequest = {
         confirmationStatus: '',
@@ -24,21 +24,18 @@ test((t) => {
     } as request;
 
     const testResponse = {
-        say: (input) => {
-            t.is(input, 'Hello to you person name');
+        audioPlayerStop: (input) => {
+            t.is(input, undefined);
             return testResponse;
         },
         shouldEndSession: (shouldEnd) => {
-            t.true(shouldEnd);
+            t.false(shouldEnd);
             return testResponse;
         },
     } as response;
 
     t.is(helloWorld.action(testRequest, testResponse), testResponse);
 
-    t.is(helloWorld.name, 'HelloWorld');
-    t.deepEqual(helloWorld.schema().slots, {name: 'NAME'});
-    t.deepEqual(helloWorld.schema().utterances,
-                ['I would like to say hello to the world and {-|name}', 'Can I say hello to {you|me|them}']);
+    t.is(helloWorld.name, 'AMAZON.PauseIntent');
 
 });

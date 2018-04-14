@@ -7,5 +7,6 @@ import { request, response } from "alexa-app/types";
  * @param response
  */
 export function helpAction(alexaRequest: request, alexaResponse: response) {
-    return alexaResponse.say('Help text.').shouldEndSession(false);
+    // tslint:disable-next-line:max-line-length
+    return alexaResponse.say('Sound continuously plays until you say, Alexa stop, Alex pause or Alexa end').shouldEndSession(false);
 }

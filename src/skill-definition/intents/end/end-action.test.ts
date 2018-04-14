@@ -5,16 +5,12 @@ import {endAction} from './end-action';
 
 test((t) => {
 
-    t.plan(3);
+    t.plan(2);
 
     const testRequest = {} as request;
     const testResponse = {
-        say: (input) => {
-            t.is(input, `Ended ${PublishingInformation.APP_NAME} skill`);
-            return testResponse;
-        },
-        shouldEndSession: (shouldEnd) => {
-            t.true(shouldEnd);
+        audioPlayerStop: (input) => {
+            t.is(input, undefined);
             return testResponse;
         },
     } as response;

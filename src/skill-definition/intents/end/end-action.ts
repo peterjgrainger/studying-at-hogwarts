@@ -11,6 +11,5 @@ import { PublishingInformation } from "../../../publishing-information";
  * @param response alexa-app response type
  */
 export function endAction(alexaRequest: request, alexaResponse: response) {
-    return alexaResponse.say(`Ended ${PublishingInformation.APP_NAME} skill`)
-                        .shouldEndSession(true);
+    return alexaResponse.audioPlayerStop();
 }

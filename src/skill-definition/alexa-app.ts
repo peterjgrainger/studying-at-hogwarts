@@ -1,10 +1,13 @@
 import { app } from 'alexa-app';
 import { PublishingInformation } from '../publishing-information';
 import { SkillExpressOptions } from '../server/ExpressOptions';
+import { playbackNearlyFinished } from './events/playback-nearly-finished/playback-nearly-finished';
 import { AmazonDefault } from './intents/amazon-default/amazon-default';
 import { endAction } from './intents/end/end-action';
-import { HelloWorld } from './intents/hello-world/hello-world';
 import { helpAction } from './intents/help/help-action';
+import { Loop } from './intents/loop/loop';
+import { Pause } from './intents/pause/pause';
+import { Resume } from './intents/resume/resume';
 import { stopAction } from './intents/stop/stop-action';
 import { launch } from './launch/launch';
 import { Intent } from './models/intents/intent';
@@ -30,7 +33,12 @@ export class AlexaApp extends app {
         this.addIntent(new AmazonDefault('stop', stopAction));
         this.addIntent(new AmazonDefault('cancel', endAction));
         this.addIntent(new AmazonDefault('help', helpAction));
-        this.addIntent(new HelloWorld());
+        this.addIntent(new Resume());
+        this.addIntent(new Pause());
+        this.addIntent(new Loop());
+        // Continually loop the noise
+        this.audioPlayer('PlaybackNearlyFinished', playbackNearlyFinished);
+
     }
 
     /**

@@ -4,17 +4,14 @@ import {launch} from './launch';
 
 test((t) => {
 
-    t.plan(3);
+    t.plan(2);
 
     const testRequest = {};
 
     const testResponse = {
-        say: (input) => {
-            t.is(input, 'W00t launched');
-            return testResponse;
-        },
-        shouldEndSession: (shouldEnd) => {
-            t.false(shouldEnd);
+
+        audioPlayerPlayStream: (action, stream) => {
+            t.is(action, 'REPLACE_ALL');
             return testResponse;
         },
     } as response;

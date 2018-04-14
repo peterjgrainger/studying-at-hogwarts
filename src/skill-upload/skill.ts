@@ -18,6 +18,11 @@ export function skill(url: string, userSetInfo: any, links: ImageLinks) {
             sslCertificateType: "Wildcard",
             uri: url,
           },
+          interfaces: [
+            {
+              type: "AUDIO_PLAYER"
+            }
+          ]
         },
       },
       manifestVersion: "1.0",
